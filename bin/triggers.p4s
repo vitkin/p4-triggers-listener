@@ -1,2 +1,2 @@
 Triggers:
-        SERVER_notify_change-commit change-commit //depot/... "/usr/share/perforce/bin/triggers/SERVER_notify_change-commit.sh %client% %clienthost% %clientip% %serverhost% %serverip% %serverport% %serverroot% %user% %changelist% %changeroot%"
+        SERVER_notify_change-commit change-commit //depot/... "/usr/share/perforce/bin/triggers/SERVER_notify_change-commit.sh '%client%' '%clienthost%' '%clientip%' '%serverhost%' '%serverip%' '%serverport%' '%serverroot%' '%user%' '%changelist%' '%oldchangelist%' '%changeroot%'"

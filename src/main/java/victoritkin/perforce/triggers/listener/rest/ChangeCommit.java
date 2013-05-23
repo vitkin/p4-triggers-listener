@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Victor Itkin
  * @version 1.0
-  */
+ */
 @XmlRootElement(name = "change-commit")
 public class ChangeCommit
 {
@@ -17,9 +17,6 @@ public class ChangeCommit
 
   /** DOCUMENT ME! */
   String changeList;
-
-  /** DOCUMENT ME! */
-  String changeListDescription;
 
   /** DOCUMENT ME! */
   String changeRoot;
@@ -32,6 +29,12 @@ public class ChangeCommit
 
   /** DOCUMENT ME! */
   String clientIp;
+
+  /** DOCUMENT ME! */
+  String description;
+
+  /** DOCUMENT ME! */
+  String oldChangeList;
 
   /** DOCUMENT ME! */
   String serverHost;
@@ -68,7 +71,7 @@ public class ChangeCommit
    */
   public void setClient(String client)
   {
-    this.client = client;
+    this.client = unquote(client);
   }
 
   /*****************************************************************************
@@ -89,7 +92,7 @@ public class ChangeCommit
    */
   public void setClientHost(String clientHost)
   {
-    this.clientHost = clientHost;
+    this.clientHost = unquote(clientHost);
   }
 
   /*****************************************************************************
@@ -110,7 +113,7 @@ public class ChangeCommit
    */
   public void setClientIp(String clientIp)
   {
-    this.clientIp = clientIp;
+    this.clientIp = unquote(clientIp);
   }
 
   /*****************************************************************************
@@ -131,7 +134,7 @@ public class ChangeCommit
    */
   public void setServerHost(String serverHost)
   {
-    this.serverHost = serverHost;
+    this.serverHost = unquote(serverHost);
   }
 
   /*****************************************************************************
@@ -152,7 +155,7 @@ public class ChangeCommit
    */
   public void setServerIp(String serverIp)
   {
-    this.serverIp = serverIp;
+    this.serverIp = unquote(serverIp);
   }
 
   /*****************************************************************************
@@ -173,7 +176,7 @@ public class ChangeCommit
    */
   public void setServerPort(String serverPort)
   {
-    this.serverPort = serverPort;
+    this.serverPort = unquote(serverPort);
   }
 
   /*****************************************************************************
@@ -194,7 +197,7 @@ public class ChangeCommit
    */
   public void setServerRoot(String serverRoot)
   {
-    this.serverRoot = serverRoot;
+    this.serverRoot = unquote(serverRoot);
   }
 
   /*****************************************************************************
@@ -215,7 +218,7 @@ public class ChangeCommit
    */
   public void setUser(String user)
   {
-    this.user = user;
+    this.user = unquote(user);
   }
 
   /*****************************************************************************
@@ -236,7 +239,28 @@ public class ChangeCommit
    */
   public void setChangeList(String changeList)
   {
-    this.changeList = changeList;
+    this.changeList = unquote(changeList);
+  }
+
+  /*****************************************************************************
+   * DOCUMENT ME!
+   *
+   * @return DOCUMENT ME!
+   */
+  @XmlElement(name = "oldchangelist")
+  public String getOldChangeList()
+  {
+    return oldChangeList;
+  }
+
+  /*****************************************************************************
+   * DOCUMENT ME!
+   *
+   * @param oldChangeList DOCUMENT ME!
+   */
+  public void setOldChangeList(String oldChangeList)
+  {
+    this.oldChangeList = unquote(oldChangeList);
   }
 
   /*****************************************************************************
@@ -257,27 +281,44 @@ public class ChangeCommit
    */
   public void setChangeRoot(String changeRoot)
   {
-    this.changeRoot = changeRoot;
+    this.changeRoot = unquote(changeRoot);
   }
 
   /*****************************************************************************
    * DOCUMENT ME!
    *
-   * @return DOCUMENT ME!
+   * @return
    */
   @XmlElement
   public String getDescription()
   {
-    return changeListDescription;
+    return description;
   }
 
   /*****************************************************************************
    * DOCUMENT ME!
    *
-   * @param description DOCUMENT ME!
+   * @param description
    */
   public void setDescription(String description)
   {
-    this.changeListDescription = description;
+    this.description = description;
+  }
+
+  /*****************************************************************************
+   * Remove single quotes at beginning and end of the value if any.
+   *
+   * @param value DOCUMENT ME!
+   *
+   * @return DOCUMENT ME!
+   */
+  private static String unquote(final String value)
+  {
+    if (value.startsWith("'") && value.endsWith("'"))
+    {
+      return value.substring(1, value.length() - 1);
+    }
+
+    return value;
   }
 }

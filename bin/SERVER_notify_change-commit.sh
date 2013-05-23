@@ -17,7 +17,8 @@ echo "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>
     <serverroot>${7}</serverroot>
     <user>${8}</user>
     <changelist>${9}</changelist>
-    <changeroot>${10}</changeroot>
+    <oldchangelist>${10}</oldchangelist>
+    <changeroot>${11}</changeroot>
     <description><![CDATA[`p4 describe ${9}`]]></description>
 </change-commit>" | \
 curl -s -H "Content-Type: application/xml" \
